@@ -21,32 +21,39 @@ function App() {
         justifyContent: 'center',
         gap: '20px'
       }}>
-        {/* First Profile Card */}
+        {/* Profile Card for a Female Character */}
         <ProfileCard
-          name="Alice Smith"
-          email="alice.smith@example.com"
-          avatar="https://placehold.co/100x100/ADD8E6/000000?text=Alice" // Example avatar URL
+          name="Olivia Adams"
+          email="olivia.a@example.com"
+          avatar="https://avatar.iran.liara.run/public/6" // Example female cartoon avatar
         />
 
-        {/* Second Profile Card */}
+        {/* Profile Card for a Male Character */}
         <ProfileCard
-          name="Bob Johnson"
-          email="bob.j@example.com"
-          avatar="https://placehold.co/100x100/FFB6C1/000000?text=Bob" // Another example avatar URL
+          name="Liam Parker"
+          email="liam.p@example.com"
+          avatar="https://avatar.iran.liara.run/public/11" // Example male cartoon avatar
         />
 
-        {/* Third Profile Card (with a slightly different avatar for variety) */}
+        {/* Another Female Character */}
         <ProfileCard
-          name="Charlie Brown"
-          email="charlie.b@example.com"
-          avatar="https://placehold.co/100x100/90EE90/000000?text=Charlie"
+          name="Sophia Miller"
+          email="sophia.m@example.com"
+          avatar="https://avatar.iran.liara.run/public/15" // Another example female cartoon avatar
         />
 
-        {/* Fourth Profile Card (demonstrates placeholder if avatar is missing) */}
+        {/* Another Male Character */}
         <ProfileCard
-          name="Diana Prince"
-          email="diana.p@example.com"
-          // No avatar prop provided here to show the fallback
+          name="Noah Davis"
+          email="noah.d@example.com"
+          avatar="https://avatar.iran.liara.run/public/20" // Another example male cartoon avatar
+        />
+
+        {/* Profile Card showing fallback if avatar link is broken or not provided */}
+        <ProfileCard
+          name="Zoe Chen"
+          email="zoe.c@example.com"
+          avatar="https://this-link-does-not-exist.com/avatar.png" // Intentionally broken link to show onError
         />
       </div>
     </div>
