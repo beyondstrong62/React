@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import Counter from './counter.jsx'
 
 // function MApp() {
 //   return (
@@ -24,5 +25,8 @@ const reactElement = React.createElement (
 
 ReactDOM.createRoot(document.getElementById('root')).
 render(
-  reactElement
+  <>
+  <App />
+  <Counter />
+  </>
 )
