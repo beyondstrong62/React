@@ -8,6 +8,12 @@ function FeedbackForm() {
     message:  "",
     rating :"5" // Default rating to 5
   })
+  // Slide 9: Single state object for form data
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   message: '',
+  //   rating: '5' // Default rating to 5
+  // });
 
   // State to hold validation errors for each field
   const [errors, setErrors] = useState({});

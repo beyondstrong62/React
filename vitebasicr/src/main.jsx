@@ -9,6 +9,15 @@ import MySimpleForm from './form.jsx'
 import Userform from './Userform.jsx'
 import Signup from './signup.jsx'
 import FeedbackForm from './feedback.jsx'
+import IfStatementExample from './IfStatementExample.jsx'
+import TernaryOperatorExample from './Ternaroprtr.jsx'
+import LogicalANDExample from './LogicalANDExample.jsx'
+import ShowHideToggleExample from './ShowHideToggleExample.jsx'
+import RoleBasedUIExample from './RoleBasedUIExample.jsx'
+import ArrayRenderingExample from './ArrayRenderingExample.jsx'
+import AlertBannerComponentExample from './AlertBannerComponentExample.jsx'
+import DynamicQuizComponent from './DynamicQuizComponent.jsx'
+
 
 
 // function MApp() {
@@ -46,6 +55,14 @@ render(
 <Userform />
 <Signup />
 <FeedbackForm />
+<IfStatementExample />
+<TernaryOperatorExample />
+<LogicalANDExample />
+<ShowHideToggleExample />
+<RoleBasedUIExample />
+<ArrayRenderingExample />
+<AlertBannerComponentExample />
+<DynamicQuizComponent />
 
   {/* <MApp /> */}  
   </>
