@@ -17,6 +17,7 @@ import RoleBasedUIExample from './RoleBasedUIExample.jsx'
 import ArrayRenderingExample from './ArrayRenderingExample.jsx'
 import AlertBannerComponentExample from './AlertBannerComponentExample.jsx'
 import DynamicQuizComponent from './DynamicQuizComponent.jsx'
+import ThemedCard from './ThemeCard.jsx'
 
 
 
@@ -63,7 +64,7 @@ render(
 <ArrayRenderingExample />
 <AlertBannerComponentExample />
 <DynamicQuizComponent />
-
+<ThemedCard />
   {/* <MApp /> */}  
   </>
 )
