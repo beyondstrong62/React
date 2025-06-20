@@ -1,12 +1,13 @@
 import React from "react";
-import { useState } from "react"; // Importing React and useState hook
+import { useState } from "react";
 function SignupForm() {
   const [form, setForm] = useState({ name: '', email: '' });
+
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Welcome, ${form.name}!`);

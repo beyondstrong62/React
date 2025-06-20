@@ -5,7 +5,8 @@ function TextBox() {
 
   return (
     <div>
-      <textarea onChange={(e) => setText(e.target.value)}></textarea>
+      <textarea onChange={(e) => 
+        setText(e.target.value)}></textarea>
       <p>Characters: {text.length}</p>
     </div>
   );

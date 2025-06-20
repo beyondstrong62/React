@@ -8,7 +8,7 @@ function UserPanel() {
   return <div className="user-panel">Standard User View</div>;
 }
 function RoleBasedUIExample() {
-  const [user, setUser] = useState({ role: 'user' }); //
+  const [user, setUser] = useState({ name: 'Rana', role: 'user' }); //
 
   return (
     <div className="example-container">

@@ -26,11 +26,11 @@ function ContactForm() {
     // In a real application, you would typically send this formData to a backend server here.
     // Example: fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
     alert(`Thank you, ${formData.name}! Your message has been sent.`); // Just for demonstration
-    // setFormData({ // Optionally, clear the form after submission
-    //   name: '',
-    //   email: '',
-    //   message: ''
-    // });
+    setFormData({ // Optionally, clear the form after submission
+      name: '',
+      email: '',
+      message: ''
+    });
   };
 
   return (

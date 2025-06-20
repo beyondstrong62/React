@@ -7,15 +7,11 @@ function CounterButton() {
 
   // Function to increment the count when the button is clicked 
   const handleClick = () => {
-    // 4. Increment count on click
-    // Using the functional update form of setCount to ensure we're using the latest state 
     setCount(prevCount => prevCount + 1); // 
   };
-
   return (
     <div>
-      {/* 3. Show button: "Clicked X times" */}
-      <button onClick={handleClick}> {/* Attaches the handleClick function to the button's click event  */}
+      <button onClick={handleClick}> 
         Clicked {count} times
       </button>
     </div>
