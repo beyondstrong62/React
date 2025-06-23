@@ -1,36 +1,63 @@
-// AuthContext.jsx (simplified)
+// AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-
+// import { jwtDecode } from 'jwt-decode'; // Uncomment if using the library
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Will store the logged-in user object { id, name, ... }
+// Helper function to decode token (simplified for this example)
+// In a real app, you'd use 'jwt-decode' library: jwtDecode(token)
+const decodeToken = (token) => {
+  try {
+    const payloadBase64 = token.split('.')[1];
+    const decodedPayload = JSON.parse(atob(payloadBase64));
+    return {
+      id: decodedPayload.userId,
+      name: decodedPayload.username,
+      email: decodedPayload.email,
+    };
+  } catch (error) {
+    console.error("Failed to decode token:", error);
+    return null;
+  }
+};
 
-  // In a real app, you'd check for a token in localStorage on mount
-  // and validate it with your backend to re-establish session
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
   useEffect(() => {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const storedToken = localStorage.getItem('authToken');
+    if (storedToken) {
+      setToken(storedToken);
+      const decodedUser = decodeToken(storedToken);
+      if (decodedUser) {
+        setUser(decodedUser);
+      } else {
+        localStorage.removeItem('authToken');
+      }
     }
   }, []);
 
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem('currentUser', JSON.stringify(userData)); // Store user data
-    // In a real app, you'd store a token here
+  const login = (newToken) => {
+    localStorage.setItem('authToken', newToken);
+    setToken(newToken);
+    const decodedUser = decodeToken(newToken);
+    if (decodedUser) {
+      setUser(decodedUser);
+    } else {
+      localStorage.removeItem('authToken');
+      setUser(null);
+    }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('currentUser');
-    // Clear token, etc.
+    setToken(null);
+    localStorage.removeItem('authToken');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

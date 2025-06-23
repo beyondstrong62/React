@@ -1,28 +1,43 @@
-// src/Login.jsx
+// src/components/Login.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // To redirect after login
-import { useAuth } from './AuthContext'; // Import your AuthContext
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Note: path changed to .. to go up one level
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth(); // Get the login function from AuthContext
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real application, you would send these credentials to your backend
-    // For this example, let's simulate a successful login
-    if (username && password) {
-      const simulatedUserData = {
-        id: username, // Using username as ID for simplicity
-        name: username,
-        email: `${username}@example.com`,
-      };
-      login(simulatedUserData); // Call the login function from AuthContext
-      navigate('/'); // Redirect to the home page after login
-    } else {
-      alert('Please enter username and password.');
+
+    try {
+      // Replace 'http://localhost:5000/api/login' with your actual backend login endpoint
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Login failed! Please check credentials.');
+      }
+
+      const data = await response.json();
+      const receivedToken = data.token; // Your backend should return a 'token' property
+
+      if (receivedToken) {
+        login(receivedToken);
+        navigate('/');
+      } else {
+        throw new Error('No token received from server.');
+      }
+
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert(error.message); // Simple alert for now, use better UI for errors
     }
   };
 

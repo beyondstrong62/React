@@ -1,24 +1,32 @@
+// src/components/UserProfile.jsx
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // Import your AuthContext
+import { useParams, Link } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Note: path changed to .. to go up one level
 
 function UserProfile() {
-  const { id } = useParams(); // ID from the URL (e.g., '42', 'john.doe')
-  const { user } = useAuth(); // The currently logged-in user object
+  const { id } = useParams();
+  const { user } = useAuth();
 
-  // Determine if the currently viewed profile is the logged-in user's profile
   const isMyProfile = user && user.id === id;
 
-  // In a real app, you'd fetch profile data for 'id' from your backend
-  // For demonstration, let's just show some text
-  const profileData = {
-    'user123': { name: 'Alice', bio: 'Loves React.' },
-    '42': { name: 'Bob', bio: 'Enjoys coding.' },
-    // ... more user data
-    [user?.id]: { name: user?.name, bio: 'This is my personal bio!' } // Example for logged-in user
+  // Simulate fetching data for the displayed profile
+  // In a real app, you'd make an API call to your backend here
+  // const [profileData, setProfileData] = useState(null);
+  // useEffect(() => {
+  //   // Example: fetch(`/api/users/${id}`, { headers: { Authorization: `Bearer ${token}` }})
+  //   // setProfileData(...)
+  // }, [id, token]);
+
+  // For demonstration:
+  const dummyUserProfiles = {
+    'alice': { name: 'Alice', bio: 'A friendly user.', email: 'alice@example.com' },
+    'bob': { name: 'Bob', bio: 'Loves coding in React.', email: 'bob@example.com' },
+    'charlie': { name: 'Charlie', bio: 'Enjoys learning new tech.', email: 'charlie@example.com' },
   };
 
-  const displayProfile = profileData[id] || { name: 'Unknown User', bio: 'Profile not found.' };
+  const currentProfileData = isMyProfile ? user : dummyUserProfiles[id];
+  const displayProfile = currentProfileData || { name: 'Unknown User', bio: 'Profile not found.' };
+
 
   return (
     <div>
@@ -26,15 +34,18 @@ function UserProfile() {
       <p>User ID: <strong>{id}</strong></p>
       <p>Name: {displayProfile.name}</p>
       <p>Bio: {displayProfile.bio}</p>
+      {isMyProfile && displayProfile.email && (
+        <p>Email: {displayProfile.email}</p>
+      )}
 
       {isMyProfile && (
-        <button>Edit Profile</button> // Only show "Edit" button if it's your profile
+        <button style={{ padding: '8px 12px', cursor: 'pointer', marginRight: '10px' }}>Edit Profile</button>
       )}
-      {!isMyProfile && user && (
-         <button>Follow {displayProfile.name}</button> // Example for other users
+      {!isMyProfile && user && ( // If logged in and viewing someone else's profile
+        <button style={{ padding: '8px 12px', cursor: 'pointer' }}>Follow {displayProfile.name}</button>
       )}
-      {!user && (
-        <p>Login to see personalized options.</p>
+      {!user && ( // If not logged in at all
+        <p>Please <Link to="/login">login</Link> to see personalized options or interact with profiles.</p>
       )}
     </div>
   );
